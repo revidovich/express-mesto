@@ -3,6 +3,6 @@ const {
   getCards
 } = require('../controllers/cards.js')
 
-router.get('/', getCards);
+router.get('/cards', getCards);
 
 module.exports = router;
