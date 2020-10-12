@@ -6,24 +6,19 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint **/*.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.2.0",
+    "eslint": "^7.11.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-jsx-a11y": "^6.3.0",
-    "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-react-hooks": "^4.0.0",
     "nodemon": "^2.0.4"
   },
   "keywords": [],
-  "description": "",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1"
   }
 }
