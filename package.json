@@ -1,12 +1,13 @@
 {
-  "name": "exercises",
+  "name": "mesto-express",
   "description": "backend for mesto-react",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "start http://localhost:3000 && node app.js",
     "dev": "nodemon app.js",
-    "lint": "eslint **/*.js"
+    "lint": "eslint **/*.js",
+    "lint-fix": "eslint --fix --ext .js ."
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,15 @@
   "keywords": [],
   "dependencies": {
     "eslint-plugin-import": "^2.22.1",
-    "express": "^4.17.1"
-  }
+    "express": "^4.17.1",
+    "mongoose": "^5.10.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nutkatuz/express-mesto.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nutkatuz/express-mesto/issues"
+  },
+  "homepage": "https://github.com/nutkatuz/express-mesto#readme"
 }

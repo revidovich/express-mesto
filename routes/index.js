@@ -7,7 +7,7 @@ const notFoundRouter = require('./not_found');
 router.use(
   userRouter,
   cardsRouter,
-  notFoundRouter
+  notFoundRouter,
 );
 
 module.exports = router;
