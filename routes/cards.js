@@ -3,7 +3,7 @@ const {
   getCards,
   postCard,
   deleteCard,
-} = require('../controllers/cards');
+} = require('../controllers/cards.js');
 
 cardsRouter.get('/cards', getCards);
 cardsRouter.post('/cards', postCard);

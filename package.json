@@ -4,22 +4,22 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "start http://localhost:3000 && node app.js",
-    "dev": "nodemon app.js",
+    "start": "start node app.js",
+    "dev": "start http://localhost:3000 && nodemon app.js",
     "lint": "eslint **/*.js",
     "lint-fix": "eslint --fix --ext .js ."
   },
-  "author": "",
+  "author": "Anna Revidovich",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^7.11.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "nodemon": "^2.0.4"
   },
   "keywords": [],
   "dependencies": {
-    "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
     "mongoose": "^5.10.11"
   },

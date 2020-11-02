@@ -6,7 +6,9 @@ const getUsers = async (req, res) => {
     const users = await User.find({});
     res.status(200).send(users);
   } catch (err) {
-    res.status(400).send({ message: `Ошибка на сервере при поиске полей Users: ${err}` });
+    res
+      .status(400)
+      .send({ message: `Ошибка на сервере при поиске полей Users: ${err}` });
   }
 };
 
@@ -14,11 +16,14 @@ const getUser = async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params._id });
     if (!user) {
-      return res.status(404).send({ message: 'Нет пользователя с таким id' });
+      res.status(404).send({ message: 'Нет пользователя с таким id' });
+    } else {
+      res.status(200).send(user);
     }
-    return res.status(200).send(user);
   } catch (err) {
-    res.status(400).send({ message: `Ошибка на сервере при поиске пользователя: ${err}` });
+    res
+      .status(400)
+      .send({ message: `Ошибка на сервере при поиске пользователя: ${err}` });
   }
 };
 
@@ -45,10 +50,15 @@ const editUser = async (req, res) => {
 const editUserAvatar = async (req, res) => {
   try {
     const { avatar } = req.body;
-    const newavatar = await User.findByIdAndUpdate({ _id: req.user._id }, { avatar });
+    const newavatar = await User.findByIdAndUpdate(
+      { _id: req.user._id },
+      { avatar },
+    );
     res.status(200).send(newavatar);
   } catch (err) {
-    res.status(400).send({ message: `Ошибка на сервере при патче авы: ${err}` });
+    res
+      .status(400)
+      .send({ message: `Ошибка на сервере при патче авы: ${err}` });
   }
 };
 

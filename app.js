@@ -1,11 +1,10 @@
 // app.js — входной файл
-const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 
 const PORT = 3000;
 const app = express();
-const routes = require('./routes/index');
+const routes = require('./routes/index.js');
 
 // подключаемся к серверу mongo
 mongoose.connect('mongodb://localhost:27017/mestodb', {
@@ -17,16 +16,16 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 // подключаем мидлвары, роуты и всё остальное...
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // нет сторонним пакетам
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(routes);
 
 app.use((req, res, next) => { // временно вместо авторизации
-  req.user = {
+  req.user = { // Во время выполнения роутов объект req.user должен быть инициализирован.
     _id: '5f93590a3ea6942bc8a58414',
   };
   next();
 });
 
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
+app.use(routes);
+// eslint-disable-next-line no-console
+app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
+
+// node_modules/.bin/eslint --ext=.js ./ --ignore-pattern "public/"
