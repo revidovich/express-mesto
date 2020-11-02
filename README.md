@@ -7,6 +7,6 @@ PUT /cards/:cardId/likes — поставить лайк карточке
 DELETE /cards/:cardId/likes — убрать лайк с карточки -->
 
 ### Как запускать проект:
-Клонируйте реп на свой комп и установите модули ноды,
-`npm run start` для запуска сервера на http://localhost:3000, 
-`npm run dev` откроет в браузере с hot-reload (установите nodemon)
+Клонируйте реп на свой комп и установите модули ноды,  
+`npm run start` для запуска сервера на http://localhost:3000,  
+`npm run dev` откроет в браузере с hot-reload (установите nodemon)  

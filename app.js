@@ -26,6 +26,6 @@ app.use((req, res, next) => { // временно вместо авториза�
 
 app.use(routes);
 // eslint-disable-next-line no-console
-app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
+app.listen(PORT, () => console.log(`App listening on port ${PORT}..`));
 
 // node_modules/.bin/eslint --ext=.js ./ --ignore-pattern "public/"
