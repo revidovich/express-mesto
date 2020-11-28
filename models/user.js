@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+const isEmail = require('validator/lib/isEmail');
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -5,13 +7,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    required: true,
+    default: 'Жак-Ив Кусто',
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    required: true,
+    default: 'Исследователь',
   },
   avatar: {
     type: String,
@@ -21,15 +23,41 @@ const userSchema = new mongoose.Schema({
       },
       message: (props) => `ссылка ${props.value} невалидна!`,
     },
+    default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
+  },
+  email: {
+    type: String,
+    unique: true,
     required: true,
+    validate: {
+      validator: (v) => isEmail(v),
+      message: 'Неправильный формат почты',
+    },
+  },
+  password: { // здесь неясно что писать ваще
+    type: String,
+    required: true,
+    select: false,
   },
 });
-// /^https?:\/\/[w{3}?\.?/w#?$/i конец строки не пропускает
-// /^https?:\/\/(?:[-\w]+\.)?([-\w]+)\.\w+(?:\.\w+)?\/?.*/i
-// http://ya.ru
-// https://www.ya.ru
-// http://2-domains.ru
-// http://ya.ru/path/to/deep/
-// http://ya-ya-ya.ru
+
+// Описываем метод findUserByCredentials -Собственные методы моделей Mongoose для контроллера логина
+// eslint-disable-next-line func-names
+userSchema.statics.findUserByCredentials = function (email, password) {
+  return this.findOne({ email }).select('+password')
+  // return this.findOne({ email }) в случае аутентификации хеш пароля нужен. Чтобы это реализовать, после вызова метода модели, нужно добавить вызов метода select, передав ему строку +password:
+    .then((user) => {
+      if (!user) {
+        return Promise.reject(new Error('Неправильные почта или пароль'));
+      }
+      return bcrypt.compare(password, user.password)
+        .then((matched) => {
+          if (!matched) {
+            return Promise.reject(new Error('Неправильные почта или пароль'));
+          }
+          return user; // теперь user доступен
+        });
+    });
+};
 
 module.exports = mongoose.model('user', userSchema);
