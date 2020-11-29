@@ -1,13 +1,13 @@
 const express = require('express');
-const path = require('path');
+
 const PORT = 3000;
 const app = express();
-const routes = require('./routes/index.js');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
-const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { errors } = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const routes = require('./routes/index.js');
 
 // подключаемся к серверу mongo
 mongoose.connect('mongodb://localhost:27017/mestodb', {
@@ -36,4 +36,5 @@ app.use((err, req, res, next) => {
   next(); // дальше нет ничего
 });
 
+// eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`App listening on port ${PORT}..`));
