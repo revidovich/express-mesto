@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const isEmail = require('validator/lib/isEmail');
 const mongoose = require('mongoose');
+const ValidationError = require('../errors/ValidationError');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -42,18 +43,18 @@ const userSchema = new mongoose.Schema({
 });
 
 // Описываем метод findUserByCredentials -Собственные методы моделей Mongoose для контроллера логина
+
 // eslint-disable-next-line func-names
 userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email }).select('+password')
-  // return this.findOne({ email }) в случае аутентификации хеш пароля нужен. Чтобы это реализовать, после вызова метода модели, нужно добавить вызов метода select, передав ему строку +password:
     .then((user) => {
       if (!user) {
-        return Promise.reject(new Error('Неправильные почта или пароль'));
+        return Promise.reject(new ValidationError('Неправильные почта или пароль'));
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            return Promise.reject(new Error('Неправильные почта или пароль'));
+            return Promise.reject(new ValidationError('Неправильные почта или пароль'));
           }
           return user; // теперь user доступен
         });

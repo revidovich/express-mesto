@@ -1,12 +1,24 @@
 const authRouter = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
 const {
   login,
   createUser,
 } = require('../controllers/users.js');
 
-// удалите обработчик создания пользователя — он больше не нужен
-// userRouter.post('/users', createUser);
-authRouter.post('/signin', login);// для логина.контроллер login
-authRouter.post('/signup', createUser);// для регистрации.контроллер createUser
+authRouter.post('/signin', celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(2),
+    // у меня пароль из 2х....
+    // я пока так оставлю, не знаю как поменять пароль
+  }),
+}), login);
+
+authRouter.post('/signup', celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(8), // ho ho
+  }),
+}), createUser);
 
 module.exports = authRouter;

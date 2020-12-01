@@ -6,5 +6,3 @@ class NotFoundError extends Error {
 }
 
 module.exports = NotFoundError;
-
-// res.status(404). не найдено по данному айди карточка или пользователь

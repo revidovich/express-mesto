@@ -5,10 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "start http://localhost:3000 && nodemon app.js",
+    "dev": "nodemon app.js",
     "lint": "eslint **/*.js",
-    "lint-fix": "eslint --fix --ext .js .",
-    "test": "jest"
+    "fix": "eslint --fix --ext .js ."
   },
   "author": "Anna Revidovich",
   "license": "ISC",

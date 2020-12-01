@@ -6,5 +6,3 @@ class ConflictError extends Error {
 }
 
 module.exports = ConflictError;
-
-// res.status(409). попытка зарегать вторую учётку на то же мыло

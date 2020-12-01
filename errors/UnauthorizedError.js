@@ -6,5 +6,3 @@ class UnauthorizedError extends Error {
 }
 
 module.exports = UnauthorizedError;
-
-// res.status(401). нет токена или невалидный пароль

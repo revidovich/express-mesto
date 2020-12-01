@@ -6,5 +6,3 @@ class ForbiddenError extends Error {
 }
 
 module.exports = ForbiddenError;
-
-// res.status(403). обновление чужой инфы - запрещено

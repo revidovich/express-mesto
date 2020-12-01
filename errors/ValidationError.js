@@ -6,5 +6,3 @@ class ValidationError extends Error {
 }
 
 module.exports = ValidationError;
-
-// res.status(400). валидейшн эррор или каст эррор

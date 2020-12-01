@@ -10,12 +10,12 @@ const {
 
 userRouter.get('/users', getUsers);
 
-userRouter.get('/users/me', getCurrentUser);// для получения информации о текущем
+// остальные - с валидацией
+
+userRouter.get('/users/me', getCurrentUser);
 
 userRouter.get('/users/:_id', celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().required().length(24).hex(), //alphanum()????
-  }),
+  params: Joi.object().keys({ id: Joi.string().required().length(24).hex() }),
 }), getUser);
 
 userRouter.patch('/users/me', celebrate({
